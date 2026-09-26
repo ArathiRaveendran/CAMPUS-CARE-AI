@@ -1,0 +1,266 @@
+.staff-dashboard-page {
+  min-height: 100vh;
+  background: #f0f6fd;
+  padding: 30px 7%;
+  box-sizing: border-box;
+}
+
+/* Navigation */
+
+.staff-dashboard-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  margin-bottom: 35px;
+  background: #ffffff;
+  border: 1px solid #e5edf6;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(9, 45, 85, 0.06);
+  box-sizing: border-box;
+}
+
+.staff-dashboard-nav button {
+  border: none;
+  background: transparent;
+  color: #52677d;
+  padding: 11px 16px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.staff-dashboard-nav button:hover {
+  background: #eef6ff;
+  color: #0877d1;
+}
+
+.staff-dashboard-nav button.active {
+  background: #0877d1;
+  color: white;
+  box-shadow: 0 4px 10px rgba(8, 119, 209, 0.2);
+}
+
+/* Header */
+
+.staff-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.staff-dashboard-header h1 {
+  margin: 0;
+  color: #092d55;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.staff-dashboard-header h1 span {
+  color: #0877d1;
+}
+
+.staff-dashboard-header p {
+  margin: 6px 0 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.staff-profile-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e1eaf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  box-shadow: 0 5px 15px rgba(9, 45, 85, 0.08);
+}
+
+/* Welcome */
+
+.staff-welcome {
+  background: linear-gradient(135deg, #071f45, #0b4e8c);
+  color: white;
+  border-radius: 22px;
+  padding: 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 30px rgba(7, 31, 69, 0.18);
+}
+
+.staff-welcome p {
+  margin: 0 0 8px;
+  opacity: 0.85;
+}
+
+.staff-welcome h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
+
+.staff-welcome span {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* Statistics */
+
+.staff-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 35px;
+}
+
+.staff-stat-card {
+  background: white;
+  border: 1px solid #e8eef5;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 8px 25px rgba(9, 45, 85, 0.06);
+}
+
+.staff-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #eef6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+}
+
+.staff-stat-card h3 {
+  margin: 0;
+  color: #092d55;
+  font-size: 25px;
+}
+
+.staff-stat-card p {
+  margin: 4px 0 0;
+  color: #718096;
+  font-size: 13px;
+}
+
+/* Quick Actions */
+
+.staff-actions h2 {
+  color: #092d55;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.staff-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.staff-action-card {
+  background: white;
+  border: 1px solid #e8eef5;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(9, 45, 85, 0.06);
+  transition: all 0.2s ease;
+}
+
+.staff-action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(9, 45, 85, 0.1);
+}
+
+.action-icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.staff-action-card h3 {
+  margin: 0 0 8px;
+  color: #092d55;
+  font-size: 19px;
+}
+
+.staff-action-card p {
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 42px;
+}
+
+.staff-action-card button {
+  margin-top: 15px;
+  border: none;
+  background: #eef6ff;
+  color: #0877d1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.staff-action-card button:hover {
+  background: #0877d1;
+  color: white;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .staff-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .staff-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .staff-dashboard-page {
+    padding: 20px 5%;
+  }
+
+  .staff-dashboard-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .staff-dashboard-nav button {
+    width: 100%;
+  }
+
+  .staff-dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .staff-welcome {
+    padding: 25px;
+  }
+
+  .staff-welcome h2 {
+    font-size: 24px;
+  }
+
+  .staff-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-action-card {
+    padding: 22px;
+  }
+}

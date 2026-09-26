@@ -1,0 +1,789 @@
+/* =========================
+   GLOBAL RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #9ee3e6;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* =========================
+   APP CONTAINER
+========================= */
+.app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* =========================
+   HEADER / NAVIGATION
+========================= */
+.header {
+  height: 80px;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+  background: linear-gradient(90deg, #093766 0%, #08437a 45%, #0b4e8c 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.header-inner {
+  height: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* BRAND LOGO & TITLE */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: linear-gradient(135deg, #0f75e0 0%, #0050ba 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 110, 230, 0.35);
+  /* shield/badge silhouette to match reference logo mark */
+  clip-path: polygon(50% 0%, 100% 18%, 100% 58%, 50% 100%, 0% 58%, 0% 18%);
+}
+
+.brand-text h1 {
+  font-size: 23px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.brand-text h1 span {
+  color: #38bdf8;
+  font-weight: 800;
+}
+
+.brand-text p {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #a4caf0;
+}
+
+/* NAVIGATION LINKS */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.nav a {
+  position: relative;
+  color: #d1e5f7;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+  transition: color 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #ffffff;
+}
+
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 10px;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+/* HEADER RIGHT ACTIONS */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.theme-button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.theme-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.smart-campus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2f1ff;
+  font-size: 13px;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  background: #0a2148;
+}
+
+/* CAMPUS IMAGE (DIMMED & SIZED) */
+.hero-image {
+ position: absolute;
+  z-index: 0;
+  inset: 0 0 0 auto;
+  width: 56%;
+  overflow: hidden;
+  clip-path: ellipse(97% 110% at 100% 50%);
+}
+.hero-image img {
+ width: 100%;
+  height: 100%;
+  object-fit:fill;
+  object-position: center 83%;
+  transform: none;
+  filter: none;
+}
+
+/* BLUE OVERLAY WITH TRANSLUCENT SWEEP */
+/* Blends the solid navy background smoothly into the campus photo so the
+   left-hand text always sits on a solid, readable background. */
+
+.hero-overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(7 33 72 / 96%) 0%,
+    rgb(7 33 72 / 84%) 32%,
+    rgb(7 33 72 / 30%) 49%,
+    transparent 66%
+  );
+  pointer-events: none;
+}
+.hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(7 33 72 / 96%) 0%,
+    rgb(7 33 72 / 84%) 32%,
+    rgb(7 33 72 / 30%) 49%,
+    transparent 66%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+
+
+
+/* GLOWING CURVED ACCENT DIVIDER */
+/* The soft circular glow / halo that sits at the seam between the text
+   panel and the campus photo. */
+
+/* HERO TEXT CONTENT */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 48%;
+  padding-left: 2%;
+  padding-top: 65px;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  border-radius: 30px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(110, 205, 255, 0.25);
+  color: #7dd3fc;
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+
+.hero-content h2 {
+  margin-top: 20px;
+  font-size: 68px;
+  line-height: 0.98;
+  letter-spacing: -2px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.hero-content h2 span {
+  color: #38bdf8;
+  display: block;
+  margin-top: 4px;
+}
+
+.hero-description {
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #d0e6f8;
+  max-width: 520px;
+}
+
+/* LOGIN BUTTONS */
+.login-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.login-btn {
+  height: 56px;
+  min-width: 190px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+}
+
+.login-btn.student {
+  background: linear-gradient(135deg, #1d72f2 0%, #105fd4 100%);
+  box-shadow: 0 8px 22px rgba(29, 114, 242, 0.35);
+}
+
+.login-btn.staff {
+  background: linear-gradient(135deg, #05b08d 0%, #039073 100%);
+  box-shadow: 0 8px 22px rgba(5, 176, 141, 0.3);
+}
+
+.login-btn.admin {
+  background: linear-gradient(135deg, #704ee7 0%, #5b3bd1 100%);
+  box-shadow: 0 8px 22px rgba(112, 78, 231, 0.35);
+}
+
+.button-icon {
+  font-size: 18px;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 18px;
+}
+
+/* TRUST INDICATORS ROW */
+.trust-row {
+  display: flex;
+  align-items: center;
+  margin-top: 38px;
+  gap: 18px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #c0deed;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.trust-item span {
+  color: #38bdf8;
+  font-size: 16px;
+}
+
+.divider {
+  height: 16px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   FLOATING FEATURES CARD
+========================= */
+.features {
+  position: relative;
+  z-index: 10;
+  max-width: 1310px;
+  width: calc(100% - 64px);
+  margin: -50px auto 60px auto;
+  padding: 28px 44px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 16px 45px rgba(5, 35, 70, 0.12);
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  align-items: center;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 10px;
+}
+
+.feature-icon {
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.feature-icon.blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.feature-icon.green {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.feature-icon.purple {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.feature h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0a2540;
+  margin-bottom: 5px;
+}
+
+.feature p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.feature-divider {
+  width: 1px;
+  height: 65px;
+  background: #e2e8f0;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 1100px) {
+  .nav {
+    gap: 25px;
+    margin-right: 20px;
+  }
+  .smart-campus {
+    display: none;
+  }
+  .hero-content h2 {
+    font-size: 54px;
+  }
+  .login-btn {
+    min-width: 160px;
+  }
+  .hero-curve {
+    width: 460px;
+    height: 460px;
+  }
+}
+
+@media (max-width: 800px) {
+  .header {
+    height: auto;
+    padding: 16px 0;
+  }
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0 0 0;
+  }
+  .hero {
+    height: auto;
+    padding-bottom: 80px;
+  }
+  .hero-image {
+    width: 100%;
+    opacity: 0.35;
+  }
+  .hero-curve {
+    display: none;
+  }
+  .hero-overlay {
+    background: rgba(8, 24, 56, 0.55);
+  }
+  .hero-content {
+    width: 100%;
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+  .hero-content h2 {
+    font-size: 42px;
+  }
+  .login-buttons {
+    flex-direction: column;
+    max-width: 320px;
+  }
+  .features {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: -30px;
+    padding: 24px;
+  }
+  .feature-divider {
+    display: none;
+  }
+}
+/* ================= ABOUT SECTION ================= */
+
+.about-section {
+  padding: 90px 60px;
+  background: #f8fbfcb0;
+  scroll-margin-top: 80px;
+}
+
+.about-content {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.section-label {
+  display: inline-block;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.about-text h2,
+.contact-heading h2 {
+  margin: 0 0 20px;
+  font-size: 38px;
+  line-height: 1.2;
+  color: #1e293b;
+}
+
+.about-text h2 span,
+.contact-heading h2 span {
+  color: #4f46e5;
+}
+
+.about-text p,
+.contact-heading p {
+  color: #64748b;
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.about-cards {
+  display: grid;
+  gap: 16px;
+}
+
+.about-card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.about-card > div {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.about-card h3 {
+  margin: 0 0 6px;
+  color: #1e293b;
+}
+
+.about-card p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+
+/* ================= CONTACT SECTION ================= */
+
+.contact-section {
+  padding: 90px 60px;
+  background: rgb(214, 232, 240);
+  scroll-margin-top: 80px;
+}
+
+.contact-content {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.contact-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 45px;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.contact-card {
+  padding: 30px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.contact-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.contact-card h3 {
+  margin: 0 0 8px;
+  color: #1e293b;
+}
+
+.contact-card p {
+  margin: 0;
+  color: #64748b;
+}
+
+
+/* ================= SMOOTH SCROLL ================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .about-section,
+  .contact-section {
+    padding: 60px 25px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-text h2,
+  .contact-heading h2 {
+    font-size: 30px;
+  }
+
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* ================= THEME TOGGLE ================= */
+
+.theme-button {
+  cursor: pointer;
+}
+
+.light-mode {
+  background: #f8fafc;
+}
+
+.light-mode .header {
+  background: #ffffff;
+}
+
+.light-mode .brand-text h1,
+.light-mode .brand-text p,
+.light-mode .nav a {
+  color: #1e293b;
+}
+
+.light-mode .hero {
+  background: #eaf2ff;
+}
+
+.light-mode .hero-overlay {
+  opacity: 0.25;
+}
+
+.light-mode .hero-content h2 {
+  color: #1e293b;
+}
+
+.light-mode .hero-description {
+  color: #475569;
+}
+
+.light-mode .features {
+  background: #ffffff;
+}
+/* ================= HERO PROFESSIONAL ANIMATION ================= */
+
+.hero-content .ai-badge {
+  animation: heroReveal 1s ease-out both;
+}
+
+.hero-content h2 {
+  animation: heroTitle 1.2s ease-out 0.2s both;
+}
+
+.hero-content .hero-description {
+  animation: heroReveal 1s ease-out 0.5s both;
+}
+
+.hero-content .login-buttons {
+  animation: heroButtons 1s ease-out 0.7s both;
+}
+
+.hero-content .trust-row {
+  animation: heroReveal 1s ease-out 0.9s both;
+}
+
+
+/* Main text animation */
+
+@keyframes heroTitle {
+
+  0% {
+    opacity: 0;
+    transform: translateX(-80px) scale(0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateX(10px) scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+}
+
+
+/* Normal content animation */
+
+@keyframes heroReveal {
+
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* Login buttons */
+
+@keyframes heroButtons {
+
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
