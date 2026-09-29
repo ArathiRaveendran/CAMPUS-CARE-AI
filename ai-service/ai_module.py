@@ -10,7 +10,10 @@ load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
 
-client = genai.Client(api_key=api_key)
+client = genai.Client(
+    api_key=api_key,
+    http_options={"timeout": 30000}
+)
 
 
 def analyze_complaint(complaint):
@@ -59,13 +62,17 @@ Do not add Markdown, explanations, or ```json.
             return result
 
         except Exception as e:
-
             print(f"Analysis attempt {attempt + 1} failed.")
+            print("Actual error:", repr(e))
+
+            # Do not retry when Gemini quota is exhausted
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                print("Gemini quota exhausted. Stopping retries.")
+                return None
 
             if attempt < 2:
                 print("Retrying in 5 seconds...")
                 time.sleep(5)
-
             else:
                 print("Gemini service is currently unavailable.")
                 return None
@@ -144,13 +151,17 @@ Do not add Markdown or explanations outside the JSON.
             return json.loads(response.text)
 
         except Exception as e:
-
             print(f"Verification attempt {attempt + 1} failed.")
+            print("Actual error:", repr(e))
+
+            # Do not retry when Gemini quota is exhausted
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                print("Gemini quota exhausted. Stopping retries.")
+                return None
 
             if attempt < 2:
                 print("Retrying in 5 seconds...")
                 time.sleep(5)
-
             else:
                 print("Gemini verification is currently unavailable.")
                 return None
@@ -166,6 +177,12 @@ def process_complaint(new_complaint, existing_complaints):
         new_complaint,
         existing_complaints
     )
+
+
+    # If Gemini analysis is unavailable, still continue with similarity detection
+    if analysis is None:
+        print("AI analysis unavailable. Continuing with duplicate detection.")
+
 
     # Step 3: Check whether it is actually a duplicate
     verification = None
@@ -184,7 +201,7 @@ def process_complaint(new_complaint, existing_complaints):
         "summary": analysis["summary"] if analysis else None,
         "similar_complaint": best_complaint,
         "similarity": round(similarity, 4),
-        "duplicate": verification["duplicate"] if verification else False,
+        "duplicate": verification["duplicate"] if verification else None,
         "duplicate_reason": verification["reason"] if verification else None
     }
 
