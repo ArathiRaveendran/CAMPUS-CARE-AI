@@ -4,8 +4,8 @@ import "./AdminRequests.css";
 function AdminRequests({ setPage }) {
 
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
-
+const [statusFilter, setStatusFilter] = useState("All");
+const [selectedRequest, setSelectedRequest] = useState(null);
   const requests = [
     {
       id: "REQ001",
@@ -194,10 +194,11 @@ function AdminRequests({ setPage }) {
           </div>
 
           {filteredRequests.map((request) => (
-            <div
-              className="request-table-row"
-              key={request.id}
-            >
+           <div
+  className="request-table-row"
+  key={request.id}
+  onClick={() => setSelectedRequest(request)}
+>
 
               <span>{request.id}</span>
 
@@ -237,6 +238,170 @@ function AdminRequests({ setPage }) {
           )}
 
         </div>
+        {selectedRequest && (
+  <div className="admin-request-details">
+
+    <div className="admin-request-details-header">
+
+      <div>
+        <span className="details-request-id">
+          {selectedRequest.id}
+        </span>
+
+        <h2>Request Details</h2>
+
+        <p>
+          Student: {selectedRequest.student}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        className="close-details-button"
+        onClick={() => setSelectedRequest(null)}
+      >
+        ✕ Close
+      </button>
+
+    </div>
+
+
+    {/* Request Information */}
+    <div className="admin-details-grid">
+
+      <div>
+        <span>Category</span>
+        <strong>{selectedRequest.category}</strong>
+      </div>
+
+      <div>
+        <span>Priority</span>
+        <strong>{selectedRequest.priority}</strong>
+      </div>
+
+      <div>
+        <span>Status</span>
+        <strong>{selectedRequest.status}</strong>
+      </div>
+
+      <div>
+        <span>Submitted Date</span>
+        <strong>{selectedRequest.date}</strong>
+      </div>
+
+    </div>
+
+
+    {/* AI Analysis */}
+    <div className="admin-ai-analysis">
+
+      <div className="admin-ai-title">
+        🤖
+        <div>
+          <h3>AI Complaint Analysis</h3>
+          <p>AI-generated results for admin review</p>
+        </div>
+      </div>
+
+
+      <div className="admin-ai-grid">
+
+        <div>
+          <span>AI Category</span>
+          <strong>
+            {selectedRequest.category}
+          </strong>
+        </div>
+
+        <div>
+          <span>AI Priority</span>
+          <strong>
+            {selectedRequest.priority}
+          </strong>
+        </div>
+
+        <div>
+          <span>Suggested Department</span>
+          <strong>
+            IT Support
+          </strong>
+        </div>
+
+        <div>
+          <span>Similar Complaints</span>
+          <strong>
+            3 similar complaints found
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div className="admin-ai-summary">
+
+        <h4>AI Summary</h4>
+
+        <p>
+          The complaint has been analyzed by the AI system
+          and classified based on its category and priority.
+          Admin can review the AI-generated information
+          before assigning the request.
+        </p>
+
+      </div>
+
+
+      <div className="admin-ai-note">
+        💡 AI results are suggestions and can be reviewed
+        or modified by authorized staff or administrators.
+      </div>
+
+    </div>
+
+
+    {/* Assignment */}
+    <div className="admin-assignment-section">
+
+      <h3>Complaint Assignment</h3>
+
+      <label>Department</label>
+
+      <select defaultValue="IT Support">
+
+        <option>IT Support</option>
+        <option>Academic Department</option>
+        <option>Hostel Department</option>
+        <option>Electrical Department</option>
+        <option>Maintenance</option>
+        <option>Library</option>
+        <option>Security</option>
+
+      </select>
+
+
+      <label>Assign Staff</label>
+
+      <select defaultValue="Staff Member">
+
+        <option>Staff Member</option>
+        <option>Staff 1</option>
+        <option>Staff 2</option>
+        <option>Staff 3</option>
+
+      </select>
+
+
+      <button
+        type="button"
+        className="assign-request-button"
+      >
+        Assign Request
+      </button>
+
+    </div>
+
+  </div>
+)}
 
       </main>
 

@@ -1,6 +1,24 @@
+import { useState } from "react";
 import "./AdminLogin.css";
 
 function AdminLogin({ setPage }) {
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [adminId, setAdminId] = useState("");
+  const [forgotMessage, setForgotMessage] = useState("");
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+
+    if (!adminId.trim()) {
+      setForgotMessage("Please enter your Admin ID.");
+      return;
+    }
+
+    setForgotMessage(
+      "If an account exists with this Admin ID, password reset instructions have been sent."
+    );
+  };
+
   return (
     <div className="admin-login-page">
 
@@ -20,32 +38,85 @@ function AdminLogin({ setPage }) {
 
         <div className="admin-login-divider"></div>
 
-        <form>
+        {!showForgotPassword ? (
+          <>
+            <form>
 
-          <label>Admin ID</label>
+              <label>Admin ID</label>
 
-          <input
-            type="text"
-            placeholder="Enter your Admin ID"
-          />
+              <input
+                type="text"
+                placeholder="Enter your Admin ID"
+              />
 
-          <label>Password</label>
+              <label>Password</label>
 
-          <input
-            type="password"
-            placeholder="Enter your password"
-          />
+              <input
+                type="password"
+                placeholder="Enter your password"
+              />
 
-          <button
-  className="admin-login-submit"
-  type="button"
-  onClick={() => setPage("admin-dashboard")}
->
-  Login
-  <span>→</span>
-</button>
+              <button
+                className="admin-login-submit"
+                type="button"
+                onClick={() => setPage("admin-dashboard")}
+              >
+                Login
+                <span>→</span>
+              </button>
 
-        </form>
+            </form>
+
+            <button
+              className="admin-forgot-password"
+              type="button"
+              onClick={() => {
+                setShowForgotPassword(true);
+                setForgotMessage("");
+              }}
+            >
+              Forgot Password?
+            </button>
+          </>
+        ) : (
+          <form onSubmit={handleForgotPassword}>
+
+            <label>Admin ID</label>
+
+            <input
+              type="text"
+              placeholder="Enter your Admin ID"
+              value={adminId}
+              onChange={(e) => setAdminId(e.target.value)}
+            />
+
+            <button
+              className="admin-login-submit"
+              type="submit"
+            >
+              Send Reset Instructions
+              <span>→</span>
+            </button>
+
+            {forgotMessage && (
+              <div className="admin-forgot-message">
+                {forgotMessage}
+              </div>
+            )}
+
+            <button
+              className="admin-forgot-password"
+              type="button"
+              onClick={() => {
+                setShowForgotPassword(false);
+                setForgotMessage("");
+              }}
+            >
+              ← Back to Login
+            </button>
+
+          </form>
+        )}
 
         <button
           className="admin-back-home"

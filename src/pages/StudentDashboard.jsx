@@ -15,6 +15,10 @@ function StudentDashboard({ setPage }) {
   <button onClick={() => setPage("requests")}>
     📋 My Requests
   </button>
+  
+  <button onClick={() => setPage("notifications")}>
+  🔔 Notifications
+</button>
 
   <button onClick={() => setPage("request")}>
     📝 Submit Request

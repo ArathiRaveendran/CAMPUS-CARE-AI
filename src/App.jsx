@@ -21,6 +21,7 @@ import AdminStaff from "./pages/AdminStaff";
 import AdminRequests from "./pages/AdminRequests";
 import AdminReports from "./pages/AdminReports";
 import AdminProfile from "./pages/AdminProfile";
+import StudentNotifications from "./pages/StudentNotifications";
 
 function App() {
   const [page, setPage] = useState("home");
@@ -95,6 +96,9 @@ if (page === "requests") {
       setPage={setPage}
     />
   );
+}
+if (page === "notifications") {
+  return <StudentNotifications setPage={setPage} />;
 }
 if (page === "profile") {
   return <StudentProfile setPage={setPage} />;

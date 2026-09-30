@@ -61,6 +61,7 @@ function AdminReports({ setPage }) {
 
       </nav>
 
+
       {/* Header */}
       <header className="admin-reports-header">
 
@@ -81,6 +82,7 @@ function AdminReports({ setPage }) {
         </button>
 
       </header>
+
 
       {/* Content */}
       <main className="admin-reports-content">
@@ -106,46 +108,76 @@ function AdminReports({ setPage }) {
 
         </div>
 
+
         {/* Statistics */}
         <section className="admin-report-stats">
 
           <div className="admin-report-card">
             <div className="report-icon">📋</div>
+
             <div>
               <h3>24</h3>
               <p>Total Requests</p>
             </div>
           </div>
 
+
           <div className="admin-report-card">
             <div className="report-icon">✓</div>
+
             <div>
               <h3>10</h3>
               <p>Resolved</p>
             </div>
           </div>
 
+
           <div className="admin-report-card">
             <div className="report-icon">⏳</div>
+
             <div>
               <h3>8</h3>
               <p>Pending</p>
             </div>
           </div>
 
+
           <div className="admin-report-card">
             <div className="report-icon">🔄</div>
+
             <div>
               <h3>6</h3>
               <p>In Progress</p>
             </div>
           </div>
 
+
+          <div className="admin-report-card">
+            <div className="report-icon">🚨</div>
+
+            <div>
+              <h3>5</h3>
+              <p>High Priority</p>
+            </div>
+          </div>
+
+
+          <div className="admin-report-card">
+            <div className="report-icon">⏱️</div>
+
+            <div>
+              <h3>2.4 Days</h3>
+              <p>Avg. Resolution Time</p>
+            </div>
+          </div>
+
         </section>
 
-        {/* Report Sections */}
+
+        {/* Category + Status */}
         <section className="admin-report-grid">
 
+          {/* Categories */}
           <div className="admin-report-panel">
 
             <h3>Requests by Category</h3>
@@ -161,7 +193,7 @@ function AdminReports({ setPage }) {
             </div>
 
             <div className="report-row">
-              <span>Technical</span>
+              <span>Technical / IT</span>
               <strong>5</strong>
             </div>
 
@@ -177,33 +209,188 @@ function AdminReports({ setPage }) {
 
           </div>
 
+
+          {/* Status */}
           <div className="admin-report-panel">
 
             <h3>Request Status</h3>
 
             <div className="status-report">
+
               <span>Resolved</span>
+
               <div className="status-bar">
-                <div className="status-bar-fill resolved-fill"></div>
+                <div
+                  className="status-bar-fill resolved-fill"
+                  style={{ width: "42%" }}
+                ></div>
               </div>
+
               <strong>42%</strong>
+
             </div>
 
+
             <div className="status-report">
+
               <span>Pending</span>
+
               <div className="status-bar">
-                <div className="status-bar-fill pending-fill"></div>
+                <div
+                  className="status-bar-fill pending-fill"
+                  style={{ width: "33%" }}
+                ></div>
               </div>
+
               <strong>33%</strong>
+
             </div>
 
+
             <div className="status-report">
+
               <span>In Progress</span>
+
               <div className="status-bar">
-                <div className="status-bar-fill progress-fill"></div>
+                <div
+                  className="status-bar-fill progress-fill"
+                  style={{ width: "25%" }}
+                ></div>
               </div>
+
               <strong>25%</strong>
+
             </div>
+
+          </div>
+
+        </section>
+
+
+        {/* Department Performance */}
+        <section className="admin-report-panel department-performance">
+
+          <h3>Department Performance</h3>
+
+          <div className="department-table">
+
+            <div className="department-row department-header">
+              <span>Department</span>
+              <span>Requests</span>
+              <span>Resolved</span>
+              <span>Avg. Resolution</span>
+            </div>
+
+
+            <div className="department-row">
+              <span>IT Support</span>
+              <strong>7</strong>
+              <strong>5</strong>
+              <span>1.8 Days</span>
+            </div>
+
+
+            <div className="department-row">
+              <span>Academic</span>
+              <strong>6</strong>
+              <strong>3</strong>
+              <span>2.6 Days</span>
+            </div>
+
+
+            <div className="department-row">
+              <span>Hostel</span>
+              <strong>5</strong>
+              <strong>2</strong>
+              <span>3.1 Days</span>
+            </div>
+
+
+            <div className="department-row">
+              <span>Maintenance</span>
+              <strong>4</strong>
+              <strong>2</strong>
+              <span>2.3 Days</span>
+            </div>
+
+
+            <div className="department-row">
+              <span>Student Services</span>
+              <strong>2</strong>
+              <strong>1</strong>
+              <span>2.8 Days</span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* Priority Distribution */}
+        <section className="admin-report-panel priority-distribution">
+
+          <h3>Priority Distribution</h3>
+
+          <div className="priority-report-row">
+
+            <span>Critical</span>
+
+            <div className="priority-bar">
+              <div
+                className="priority-bar-fill critical-fill"
+                style={{ width: "8%" }}
+              ></div>
+            </div>
+
+            <strong>8%</strong>
+
+          </div>
+
+
+          <div className="priority-report-row">
+
+            <span>High</span>
+
+            <div className="priority-bar">
+              <div
+                className="priority-bar-fill high-fill"
+                style={{ width: "21%" }}
+              ></div>
+            </div>
+
+            <strong>21%</strong>
+
+          </div>
+
+
+          <div className="priority-report-row">
+
+            <span>Medium</span>
+
+            <div className="priority-bar">
+              <div
+                className="priority-bar-fill medium-fill"
+                style={{ width: "46%" }}
+              ></div>
+            </div>
+
+            <strong>46%</strong>
+
+          </div>
+
+
+          <div className="priority-report-row">
+
+            <span>Low</span>
+
+            <div className="priority-bar">
+              <div
+                className="priority-bar-fill low-fill"
+                style={{ width: "25%" }}
+              ></div>
+            </div>
+
+            <strong>25%</strong>
 
           </div>
 

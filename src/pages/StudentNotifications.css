@@ -1,0 +1,95 @@
+.student-notifications-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+.notifications-header {
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+.back-dashboard {
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+.back-dashboard:hover {
+  text-decoration: underline;
+}
+
+.notifications-header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.notifications-header p {
+  margin-top: 8px;
+  color: #64748b;
+}
+
+.notifications-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notification-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+}
+
+.notification-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.notification-content h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 17px;
+}
+
+.notification-content p {
+  margin: 0 0 8px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.notification-content span {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+@media (max-width: 700px) {
+  .student-notifications-page {
+    padding: 25px 15px;
+  }
+
+  .notification-card {
+    padding: 16px;
+  }
+}

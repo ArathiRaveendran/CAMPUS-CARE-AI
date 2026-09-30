@@ -5,6 +5,7 @@ function RequestPage({ setPage, setRequests }) {
   const [requestType, setRequestType] = useState("");
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
   const [priority, setPriority] = useState("");
   const [photo, setPhoto] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -17,6 +18,7 @@ function RequestPage({ setPage, setRequests }) {
       type: requestType,
       subject: subject,
       description: description,
+      location: location,
       priority: priority,
       photo: photo,
       status: "Pending",
@@ -77,6 +79,7 @@ function RequestPage({ setPage, setRequests }) {
                 setRequestType("");
                 setSubject("");
                 setDescription("");
+                setLocation("");
                 setPriority("");
                 setPhoto(null);
               }}
@@ -88,21 +91,29 @@ function RequestPage({ setPage, setRequests }) {
         ) : (
           <form onSubmit={handleSubmit}>
 
-            <label>Request Type</label>
+            {/* Category */}
+            <label>Complaint Category</label>
 
             <select
               value={requestType}
               onChange={(event) => setRequestType(event.target.value)}
               required
             >
-              <option value="">Select request type</option>
-              <option>Academic Support</option>
-              <option>Technical Issue</option>
-              <option>Hostel / Accommodation</option>
-              <option>Facilities</option>
+              <option value="">Select complaint category</option>
+              <option>Academic</option>
+              <option>Hostel</option>
+              <option>Electrical</option>
+              <option>Water Supply</option>
+              <option>IT/Internet</option>
+              <option>Library</option>
+              <option>Canteen</option>
+              <option>Cleanliness</option>
+              <option>Transportation</option>
+              <option>Security</option>
               <option>Other</option>
             </select>
 
+            {/* Subject */}
             <label>Subject</label>
 
             <input
@@ -113,6 +124,7 @@ function RequestPage({ setPage, setRequests }) {
               required
             />
 
+            {/* Description */}
             <label>Description</label>
 
             <textarea
@@ -122,24 +134,38 @@ function RequestPage({ setPage, setRequests }) {
               onChange={(event) => setDescription(event.target.value)}
               required
             ></textarea>
+
+            {/* Location */}
+            <label>Location</label>
+
+            <input
+              type="text"
+              placeholder="Enter the location of the issue"
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+              required
+            />
+
+            {/* Photo */}
             <label>Attach Photo (Optional)</label>
 
-<input
-  type="file"
-  accept="image/*"
-  onChange={(event) => setPhoto(event.target.files[0])}
-/>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => setPhoto(event.target.files[0])}
+            />
 
-{photo && (
-  <div className="photo-preview">
-    <p>Selected Photo:</p>
-    <img
-      src={URL.createObjectURL(photo)}
-      alt="Complaint preview"
-    />
-  </div>
-)}
+            {photo && (
+              <div className="photo-preview">
+                <p>Selected Photo:</p>
+                <img
+                  src={URL.createObjectURL(photo)}
+                  alt="Complaint preview"
+                />
+              </div>
+            )}
 
+            {/* Priority */}
             <label>Priority</label>
 
             <select
@@ -148,9 +174,10 @@ function RequestPage({ setPage, setRequests }) {
               required
             >
               <option value="">Select priority</option>
-              <option>Normal</option>
+              <option>Low</option>
+              <option>Medium</option>
               <option>High</option>
-              <option>Urgent</option>
+              <option>Critical</option>
             </select>
 
             <button type="submit">
