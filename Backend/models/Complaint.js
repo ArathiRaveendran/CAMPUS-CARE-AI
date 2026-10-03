@@ -83,6 +83,11 @@ const complaintSchema = new mongoose.Schema(
       default: false,
     },
 
+    embedding: {
+      type: [Number],
+      default: [],
+    },
+
     student: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

@@ -1,6 +1,13 @@
 const Complaint = require("../models/Complaint");
 const User = require("../models/User");
 
+const { analyzeComplaint } = require("../services/aiServices");
+
+const {
+  generateComplaintEmbedding,
+  findSimilarComplaints,
+} = require("../services/similarityServices");
+
 // Student creates a complaint
 const createComplaint = async (req, res) => {
   try {
@@ -9,7 +16,6 @@ const createComplaint = async (req, res) => {
       description,
       category,
       subCategory,
-      priority,
       location,
       imageUrl,
     } = req.body;
@@ -21,16 +27,44 @@ const createComplaint = async (req, res) => {
       });
     }
 
-    const complaint = await Complaint.create({
-      title,
-      description,
-      category: category || "Other",
-      subCategory: subCategory || "",
-      priority: priority || "Medium",
-      location: location || "",
-      imageUrl: imageUrl || "",
-      student: req.user.id,
-    });
+// Generate AI priority and summary
+const aiResult = await analyzeComplaint(title, description);
+
+// Generate embedding for the new complaint
+const embedding = await generateComplaintEmbedding(
+  title,
+  description
+);
+
+// Get existing complaints that already have embeddings
+const existingComplaints = await Complaint.find({
+  embedding: { $exists: true, $ne: [] },
+}).select("_id embedding");
+
+// Find similar complaints
+const similarComplaints = await findSimilarComplaints(
+  embedding,
+  existingComplaints
+);
+
+  const complaint = await Complaint.create({
+  title,
+  description,
+  category: category || "Other",
+  subCategory: subCategory || "",
+  priority: aiResult.priority,
+  location: location || "",
+  imageUrl: imageUrl || "",
+
+  aiSummary: aiResult.summary,
+  aiProcessed: true,
+
+  embedding,
+
+  similarComplaints,
+
+  student: req.user.id,
+});
 
     res.status(201).json({
       success: true,
